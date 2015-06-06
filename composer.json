@@ -1,0 +1,12 @@
+{
+  "name": "itarato/tingtoon",
+  "require": {
+    "silex/silex": "~1.3",
+    "doctrine/dbal": "~2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "TingToon\\": "src/"
+    }
+  }
+}
