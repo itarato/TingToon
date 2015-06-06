@@ -23,6 +23,7 @@ class CartoonControllerProvider implements ControllerProviderInterface {
 
     $ctrlFactory->get('/cartoon', 'cartoon.controller:listAll');
     $ctrlFactory->post('/cartoon/create', 'cartoon.controller:create');
+    $ctrlFactory->post('/cartoon/{id}/delete', 'cartoon.controller:delete');
 
     return $ctrlFactory;
   }

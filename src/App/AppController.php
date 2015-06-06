@@ -23,7 +23,7 @@ class AppController {
 
   protected function preProcessCartoonData(array &$list) {
     foreach ($list as $idx => $item) {
-      $list[$idx] = new CartoonRenderer(json_decode($item['data']));
+      $list[$idx] = new CartoonRenderer($item);
     }
   }
 

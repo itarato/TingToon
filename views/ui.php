@@ -13,8 +13,8 @@
 
   jQuery(function () {
     jQuery('.draggable').draggable();
-
     jQuery('#save').on('click', onStageSave);
+    jQuery('.delete').on('click', onDeleteClick);
   });
 
   var onStageSave = function () {
@@ -30,14 +30,24 @@
       'peter': calcPos('#peter'),
       'bubble1': calcPos('#bubble1'),
       'bubble2': calcPos('#bubble2'),
-      'bubble1_text': jQuery('#bubble1').val(),
-      'bubble2_text': jQuery('#bubble2').val()
+      'bubble1_text': jQuery('#bubble1 textarea').val(),
+      'bubble2_text': jQuery('#bubble2 textarea').val()
     };
 
     jQuery.post('/cartoon/create', JSON.stringify(poss), function ( response ) {
-      console.log(response);
+      window.location.reload();
     }).fail(function ( jqXHR, textStatus, errorThrown ) {
       console.log('POST failed')
+    });
+  };
+
+  var onDeleteClick = function () {
+    var $self = jQuery(this);
+    var id = $self.attr('id');
+    jQuery.post('/cartoon/' + id.toString() + '/delete', function () {
+      window.location.reload();
+    }).fail(function () {
+      console.log('Cannot delete scene.');
     });
   };
 
@@ -47,15 +57,30 @@
   .iting,
   .peter {
     background-color: brown;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 180px;
   }
 
   .bubble {
     padding: 12px;
-    background-color: cornflowerblue;
     width: 200px;
     height: 100px;
+    border: 3px solid black;
+    border-radius: 24px;
+    background-color: white;
+  }
+
+  .bubble textarea {
+    width: 194px;
+    height: 96px;
+    border: none;
+  }
+
+  .bubble,
+  .bubble textarea {
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    text-align: center;
   }
 
   .stage {
@@ -78,12 +103,14 @@
 <?php /** @var \TingToon\Cartoon\CartoonRenderer[] $cartoons */
 if (!empty($cartoons)): ?>
   <?php foreach ($cartoons as $cartoon): ?>
+
     <div class="stage">
       <div class="iting" style="<?php echo $cartoon->getXYCSSOf('iting') ?>">&nbsp;</div>
       <div class="peter" style="<?php echo $cartoon->getXYCSSOf('peter') ?>">&nbsp;</div>
       <div class="bubble" style="<?php echo $cartoon->getXYCSSOf('bubble1') ?>"><?php echo $cartoon->getTextOf('bubble1'); ?></div>
       <div class="bubble" style="<?php echo $cartoon->getXYCSSOf('bubble2') ?>"><?php echo $cartoon->getTextOf('bubble2'); ?></div>
     </div>
+    <div class="delete" id="<?php echo $cartoon->getId(); ?>">[delete]</div>
   <?php endforeach; ?>
 <?php endif; ?>
 

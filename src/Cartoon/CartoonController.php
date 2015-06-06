@@ -36,4 +36,9 @@ class CartoonController {
     return ['success' => $success];
   }
 
+  public function delete($id) {
+    $this->cartoonRepo->delete($id);
+    return ['success' => TRUE];
+  }
+
 }

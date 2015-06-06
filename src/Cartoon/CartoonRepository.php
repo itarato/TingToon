@@ -28,11 +28,20 @@ class CartoonRepository extends Repository {
   public function loadAll() {
     return $this->getConn()
       ->createQueryBuilder()
-      ->select(['data'])
+      ->select(['data', 'id'])
       ->from('scene')
       ->orderBy('created', 'ASC')
       ->execute()
       ->fetchAll();
+  }
+
+  public function delete($id) {
+    $this->getConn()
+      ->createQueryBuilder()
+      ->delete('scene')
+      ->where('id = :id')
+      ->setParameter(':id', $id)
+      ->execute();
   }
 
 }
