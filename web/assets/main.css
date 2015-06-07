@@ -1,0 +1,60 @@
+.iting {
+  background-image: url(/assets/iting.png);
+  left: 338px;
+  top: 424px;
+}
+
+.peter {
+  background-image: url(/assets/peter.png);
+  left: 264px;
+  top: 241px;
+}
+
+#bubble1 {
+  left: 78px;
+  top: -62px;
+}
+
+#bubble2 {
+  left: 426px;
+  top: -160px;
+}
+
+.iting,
+.peter {
+  width: 120px;
+  height: 180px;
+}
+
+.bubble {
+  padding: 12px;
+  width: 200px;
+  height: 100px;
+  border: 3px solid black;
+  border-radius: 24px;
+  background-color: white;
+}
+
+.bubble textarea {
+  width: 194px;
+  height: 96px;
+  border: none;
+}
+
+.bubble,
+.bubble textarea {
+  font-family: "Comic Sans MS";
+  font-size: 20px;
+  text-align: center;
+}
+
+.stage {
+  width: 800px;
+  height: 600px;
+  border: 10px solid coral;
+  overflow: hidden;
+}
+
+.stage div {
+  position: relative;
+}
